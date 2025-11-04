@@ -1,29 +1,24 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
-class Item extends Component {
-  state = { isInCart: false };
+function Item(props) {
+  const [isInCart, setIsInCart] = useState(false);
 
-  handleAddToCartClick = () => {
-    this.setState({ isInCart: !this.state.isInCart });
+  const handleAddToCartClick = () => {
+    setIsInCart(!isInCart);
   };
-
-  render() {
-    const { name, category } = this.props;
-    const { isInCart } = this.state;
 
     return (
       <li className={isInCart ? "in-cart" : ""}>
-        <span>{name}</span>
-        <span className="category">{category}</span>
+        <span>{props.name}</span>
+        <span className="category">{props.category}</span>
         <button
           className={isInCart ? "remove" : "add"}
-          onClick={this.handleAddToCartClick}
+          onClick={handleAddToCartClick}
         >
           {isInCart ? "Remove From" : "Add to"} Cart
         </button>
       </li>
     );
   }
-}
 
 export default Item;
